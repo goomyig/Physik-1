@@ -1,0 +1,412 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,positioning}
+
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Physik I}
+\rhead{Kinematik eines Massepunkts}
+\cfoot{\thepage}
+
+\definecolor{accent}{RGB}{35,70,130}
+\definecolor{lightaccent}{RGB}{232,238,248}
+
+\titleformat{\section}{\large\bfseries\color{accent}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{accent}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{0.6em}{}
+
+\newcommand{\note}[1]{%
+  \begin{center}
+  \fcolorbox{accent}{lightaccent}{%
+    \begin{minipage}{0.94\linewidth}
+    \textbf{Ergänzung aus den Vorlesungsnotizen:} #1
+    \end{minipage}}
+  \end{center}}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+{\Huge \textbf{Physik I}}\\[0.4cm]
+{\LARGE Kinematik eines Massepunkts}\\[0.8cm]
+{\large Zusammengeführte Mitschrift aus PDF-Folie und handschriftlichen Vorlesungsnotizen}\\[1.2cm]
+\vfill
+\begin{minipage}{0.9\linewidth}
+\small
+Dieses Dokument fasst die Inhalte der hochgeladenen PDF mit den während der Vorlesung ergänzten handschriftlichen Notizen in einer einheitlichen \LaTeX-Datei zusammen. Inhaltlich geht es um Ortsvektor, Geschwindigkeit, Beschleunigung, gleichmäßig beschleunigte Bewegung, freien Fall und zusammengesetzte Bewegungen.
+\end{minipage}
+\vfill
+{\large \today}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Kinematik eines Massepunkts}
+
+Ein \textbf{Massepunkt} ist ein materieller Punkt ohne Ausdehnung. In der Kinematik wird nur die Bewegung beschrieben, noch nicht ihre Ursache.
+
+\subsection{Bewegungsgleichungen}
+\subsubsection{Ort, Geschwindigkeit, Beschleunigung}
+
+Ort und Bewegung sind relativ; sie hängen vom gewählten \textbf{Bezugssystem} ab.
+
+\note{In den handschriftlichen Notizen steht ausdrücklich, dass man zuerst ein geeignetes räumliches Koordinatensystem festlegt und dass Ort und Bewegung davon abhängen, \emph{welches} Koordinatensystem gewählt wird.}
+
+\paragraph{(i) Räumliches Koordinatensystem festlegen}
+Wir wählen ein kartesisches Koordinatensystem mit Ursprung $O=(0,0,0)$ und den Achsen $x$, $y$, $z$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.25,>=Latex]
+  \draw[->,thick] (0,0) -- (3.4,0) node[below] {$x$};
+  \draw[->,thick] (0,0) -- (2.2,1.3) node[right] {$y$};
+  \draw[->,thick] (0,0) -- (0,2.8) node[left] {$z$};
+  \coordinate (A) at (1.4,1.55);
+  \coordinate (B) at (2.5,1.95);
+  \draw[->,very thick,accent] (0,0) -- (A) node[above left] {$\vec s_0(t_0)$};
+  \draw[->,very thick,accent] (0,0) -- (B) node[above right] {$\vec s(t_1)$};
+  \draw[densely dashed] (A) -- (B);
+  \fill (A) circle (1.5pt);
+  \fill (B) circle (1.5pt);
+  \node[below left] at (0,0) {$O(0,0,0)$};
+\end{tikzpicture}
+\end{center}
+
+Ein Ort wird durch einen \textbf{Ortsvektor} beschrieben.
+
+\paragraph{(ii) Lage durch Koordinaten}
+Der Ort eines Punktes wird durch die Achsenabschnitte bzw. Koordinaten $x$, $y$, $z$ festgelegt:
+\[
+\vec s_0=
+\begin{pmatrix}
+ x_0\\ y_0\\ z_0
+\end{pmatrix}.
+\]
+
+\note{Die Notizen ergänzen hier: Diese Schreibweise beschreibt den Ort zu einem bestimmten Zeitpunkt, zum Beispiel zu $t_0$. Bei Bewegung hängt der Ortsvektor vom Zeitpunkt ab.}
+
+Bei einer Bewegung schreibt man daher allgemeiner
+\[
+\vec s = \vec s(t).
+\]
+
+\paragraph{(iii) Geschwindigkeit}
+Bei Bewegung ändert sich der Ort mit der Zeit. Die Geschwindigkeit ist die zeitliche Änderung des Ortes.
+
+Für eine eindimensionale Bewegung gilt zunächst als mittlere Geschwindigkeit
+\[
+ v = \frac{\Delta s}{\Delta t}
+ \qquad [m/s]. 
+\]
+Diese Darstellung ist nur dann exakt als momentane Geschwindigkeit brauchbar, wenn $v$ konstant ist.
+
+Besser ist die Definition über die Ableitung:
+\[
+ v(t)=\frac{\dd s}{\dd t}.
+\]
+
+\note{In den Notizen wird dazu ausdrücklich vermerkt: \glqq Zeit-Ableitung liefert die momentane Geschwindigkeit\grqq.}
+
+In drei Dimensionen erhält man den Geschwindigkeitsvektor als Ableitung des Ortsvektors:
+\[
+ \vec v(t)=\frac{\dd \vec s(t)}{\dd t}=\dot{\vec s}(t)
+ =
+ \begin{pmatrix}
+   v_x\\ v_y\\ v_z
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+   \dfrac{\dd x}{\dd t}\\[0.4em]
+   \dfrac{\dd y}{\dd t}\\[0.4em]
+   \dfrac{\dd z}{\dd t}
+ \end{pmatrix}.
+\]
+
+\note{Die Notizen ergänzen, dass man die Koordinaten separat nach der Zeit ableitet; der Punkt über einer Größe steht für die Zeitableitung.}
+
+\paragraph{(iv) Beschleunigung}
+Wenn sich die Geschwindigkeit mit der Zeit ändert, liegt eine Beschleunigung vor:
+\[
+ \vec a(t)=\frac{\dd \vec v(t)}{\dd t}=\dot{\vec v}(t)=\ddot{\vec s}(t).
+\]
+In Komponenten:
+\[
+ \vec a(t)=
+ \begin{pmatrix}
+   \dfrac{\dd v_x}{\dd t}\\[0.4em]
+   \dfrac{\dd v_y}{\dd t}\\[0.4em]
+   \dfrac{\dd v_z}{\dd t}
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+   \dfrac{\dd^2 x}{\dd t^2}\\[0.4em]
+   \dfrac{\dd^2 y}{\dd t^2}\\[0.4em]
+   \dfrac{\dd^2 z}{\dd t^2}
+ \end{pmatrix}.
+\]
+
+Für die eindimensionale Betrachtung gilt:
+\[
+ a>0 \Rightarrow \text{Beschleunigung},
+ \qquad
+ a<0 \Rightarrow \text{Bremsen bzw. Verzögerung}.
+\]
+
+Zwischen Ort, Geschwindigkeit und Beschleunigung besteht also die Kette
+\[
+ \vec s(t) \xrightarrow{\ \frac{\dd}{\dd t}\ } \vec v(t)
+ \xrightarrow{\ \frac{\dd}{\dd t}\ } \vec a(t),
+\]
+und umgekehrt erhält man durch Integration wieder $\vec v(t)$ und $\vec s(t)$.
+
+\begin{center}
+\begin{tikzpicture}[>=Latex, node distance=4cm]
+
+  \node (s) {$\vec s(t)$};
+  \node[right=of s] (v) {$\vec v(t)$};
+  \node[right=of v] (a) {$\vec a(t)$};
+
+  % Gerade Pfeile: oben beschriften
+  \draw[->,thick] (s) -- node[above=6pt] {Ableitung} (v);
+  \draw[->,thick] (v) -- node[above=6pt] {Ableitung} (a);
+
+  % Gebogene Pfeile: unten führen und unten beschriften
+  \draw[->,thick] (v) to[out=230,in=310] node[below=10pt] {Aufleitung} (s);
+  \draw[->,thick] (a) to[out=230,in=310] node[below=10pt] {Aufleitung} (v);
+
+\end{tikzpicture}
+\end{center}
+
+
+
+\subsection{Gleichmäßig beschleunigte Bewegung}
+Wir betrachten nun eine Bewegung mit konstanter Beschleunigung
+\[
+ a(t)=a_0=\text{konstant}.
+\]
+
+\subsubsection{Messwerte aus dem Versuch}
+In den Notizen wurden zu einem Experiment folgende Werte festgehalten:
+
+\begin{center}
+\begin{tabular}{>{\centering\arraybackslash}m{2.3cm} >{\centering\arraybackslash}m{2.7cm} >{\centering\arraybackslash}m{2.7cm} >{\centering\arraybackslash}m{2.7cm}}
+\toprule
+$s$ [\si{\milli\meter}] & 250 & 910 & 2000\\
+\midrule
+$t$ [\si{\second}] & 0{,}949 & 1{,}962 & 2{,}979\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Aus
+\[
+ a_0 = \frac{\dd^2 s}{\dd t^2}= \ddot{\overrightarrow{s}} = \text{konstant}
+\]
+folgt durch Integration zunächst die Geschwindigkeit:
+\[
+ v(t)=\int_0^t a_0\,\dd t' = a_0 t + v_0.
+\]
+Dabei ist $v_0$ die Integrationskonstante, also die Anfangsgeschwindigkeit.
+
+Nochmaliges Integrieren liefert die Weg-Zeit-Funktion:
+\[
+ s(t)=\int_0^t v(t')\,\dd t'
+ =\int_0^t (a_0 t'+v_0)\,\dd t'
+ =\frac12 a_0 t^2 + v_0 t + s_0.
+\]
+Dabei ist $s_0$ die Anfangsposition.
+
+\note{Die handschriftlichen Notizen markieren explizit: $v_0$ und $s_0$ sind Konstanten aus der Integration. Außerdem wird angemerkt, dass die Parabelform von $s(t)$ typisch für konstante Beschleunigung ist.}
+
+Damit gelten die Standardgleichungen der gleichmäßig beschleunigten Bewegung:
+\[
+ a(t)=a_0,
+ \qquad
+ v(t)=a_0 t+v_0,
+ \qquad
+ s(t)=\frac12 a_0 t^2+v_0 t+s_0.
+\]
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.3\linewidth,height=5cm,
+  xmin=0,xmax=4,ymin=0,ymax=2,
+  axis lines=left,
+  xlabel={$t$},ylabel={$a(t)$},
+  xtick=\empty,ytick=\empty]
+  \addplot[accent,thick,domain=0:4] {1.2};
+  \node at (axis cs:0.35,1.42) {$a_0$};
+\end{axis}
+\end{tikzpicture}
+\hfill
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.3\linewidth,height=5cm,
+  xmin=0,xmax=4,ymin=0,ymax=4,
+  axis lines=left,
+  xlabel={$t$},ylabel={$v(t)$},
+  xtick=\empty,ytick=\empty]
+  \addplot[accent,thick,domain=0:4] {0.7*x + 0.8};
+  \node at (axis cs:0.35,0.95) {$v_0$};
+\end{axis}
+\end{tikzpicture}
+\hfill
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.3\linewidth,height=5cm,
+  xmin=0,xmax=4,ymin=0,ymax=5,
+  axis lines=left,
+  xlabel={$t$},ylabel={$s(t)$},
+  xtick=\empty,ytick=\empty]
+  \addplot[accent,thick,domain=0:4] {0.22*x^2 + 0.28*x + 0.35};
+  \node at (axis cs:0.28,0.5) {$s_0$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Freier Fall}
+Beim freien Fall ohne Reibung ist die Beschleunigung konstant und gleich der Erdbeschleunigung $g$:
+\[
+ a=g \approx \SI{9.81}{\meter\per\second\squared}.
+\]
+
+Für einen Körper, der aus der Ruhe losgelassen wird, gilt
+\[
+ v_0=0,
+ \qquad s_0=0,
+ \qquad v(t)=gt,
+ \qquad s(t)=\frac12 gt^2.
+\]
+
+Will man die Geschwindigkeit als Funktion der Fallhöhe $h$ bestimmen, setzt man
+\[
+ h=s(t)=\frac12 gt^2
+\qquad\Rightarrow\qquad
+ t=\sqrt{\frac{2h}{g}}.
+\]
+Eingesetzt in $v(t)=gt$ ergibt das
+\[
+ v(h)=\sqrt{2gh}.
+\]
+
+%
+%\begin{center}
+%\begin{tikzpicture}[>=Latex,scale=1]
+%  \draw[thick] (0,0) -- (0,4);
+%  \fill (0,3.6) circle (1.8pt);
+%  \draw[->,very thick] (0.8,3.5) -- (0.8,0.4);
+%  \node[right] at (0.8,2.0) {$a=g$};
+%  \draw[decorate,decoration={brace,mirror,amplitude=5pt}] (1.4,3.6) -- (1.4,0.2);
+%  \node[right] at (1.55,1.9) {$h(t)$};
+%  \node[left] at (0,0) {$0$};
+%\end{tikzpicture}
+%\end{center}
+
+\paragraph{Beispiel: Stein fällt aus \SI{100}{\meter} Höhe}
+\[
+ v = \sqrt{2\cdot \SI{9.81}{\frac{m}{s^2}}\cdot \SI{100}{\meter}}
+ \approx \SI{44.3}{\frac{m}{s}}
+ \approx \SI{159.7}{\frac{km}{h}}.
+\]
+
+\note{In den Notizen wurde zusätzlich ein Näherungsversuch mit $t\approx \SI{246}{\milli\second}$ und $s=\SI{30}{\centi\meter}$ festgehalten. Daraus ergibt sich über $g=2s/t^2$ ein Wert von ungefähr $\SI{9.92}{\meter\per\second\squared}$ und damit eine gute Näherung an den Literaturwert $\SI{9.81}{\meter\per\second\squared}$.}
+
+\subsection{Senkrechter Wurf}
+Beim senkrechten Wurf ist $v_0\neq 0$ und die Vorzeichenkonvention muss sauber beachtet werden.
+
+\paragraph{Wurf nach unten} Wählt man die positive Richtung nach unten, dann gilt
+\[
+ v(t)=v_0+gt,
+ \qquad
+ s(t)=v_0 t+\frac12 gt^2.
+\]
+
+\paragraph{Wurf nach oben} Wählt man die positive Richtung nach oben, dann wirkt die Erdbeschleunigung entgegen der Bewegungsrichtung:
+\[
+ v(t)=v_0-gt,
+ \qquad
+ s(t)=v_0 t-\frac12 gt^2.
+\]
+
+\note{Die Notizen betonen hier ausdrücklich: Auf die Vorzeichen achten.}
+
+\subsection{Zusammengesetzte Bewegung}
+Bei zusammengesetzten Bewegungen werden Geschwindigkeitsvektoren vektoriell addiert. Im Beispiel aus der PDF ist eine Vorwärtsbewegung mit einer Bewegung nach oben kombiniert:
+\[
+ \vec v = \vec v_F + \vec v_B.
+\]
+
+Mit
+\[
+ \vec v_F=
+ \begin{pmatrix}
+ 5\,\si{\meter\per\second}\\0\\0
+ \end{pmatrix},
+ \qquad
+ \vec v_B=
+ \begin{pmatrix}
+ 0\\10\,\si{\meter\per\second}\\0
+ \end{pmatrix}
+\]
+folgt
+\[
+ \vec v=
+ \begin{pmatrix}
+ 5\\10\\0
+ \end{pmatrix}\si{\meter\per\second}.
+\]
+Der Betrag ist
+\[
+ \abs{\vec v}=\sqrt{v_x^2+v_y^2+v_z^2}
+ =\sqrt{5^2+10^2}\,\si{\meter\per\second}
+ \approx \SI{11.2}{\meter\per\second}.
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9,>=Latex]
+  \draw[->,thick] (0,0) -- (5.2,0) node[below] {$x$};
+  \draw[->,thick] (0,0) -- (0,4.8) node[left] {$y$};
+  \draw[->,very thick,accent] (0,0) -- (2.2,0) node[midway,below] {$\vec v_F$};
+  \draw[->,very thick,accent] (2.2,0) -- (2.2,3.2) node[midway,right] {$\vec v_B$};
+  \draw[->,very thick] (0,0) -- (2.2,3.2) node[midway,left] {$\vec v$};
+  \draw[densely dashed] (0,3.2) -- (2.2,3.2);
+\end{tikzpicture}
+\end{center}
+
+\section{Kompakte Zusammenfassung}
+\begin{align*}
+\vec v(t) &= \dot{\vec s}(t),\\
+\vec a(t) &= \dot{\vec v}(t)=\ddot{\vec s}(t),\\
+\text{bei } a=a_0\text{ konstant:}\qquad
+v(t) &= a_0 t + v_0,\\
+ s(t) &= \frac12 a_0 t^2 + v_0 t + s_0,\\
+\text{freier Fall aus der Ruhe:}\qquad
+v(t) &= gt,\\
+ s(t) &= \frac12 gt^2,\\
+ v(h) &= \sqrt{2gh}.
+\end{align*}
+
+\end{document}
